@@ -13,9 +13,10 @@ static int options;
 module_param(options, int, 0444);
 
 #define LOOP 100000
-#define MAXNUMA 4
+#define MAXNUMA 5
 
 static char *ipi_funcs[] = {
+	"print_usage_info",
 	"kvm_send_ipi_mask",
 	"default_send_IPI_mask_sequence_phys",
 	"flat_send_IPI_mask",
@@ -72,7 +73,7 @@ static int apic_ipi_init(void)
 	if (!options) {
 		printk(KERN_INFO "apic_ipi: you should run insmod apic_ipi.ko options=XX, bit flags:\n");
 		for (i = 0; i < sizeof(ipi_funcs) / sizeof(ipi_funcs[0]); i++) {
-			printk(KERN_INFO "apic_ipi:	bit[%d] %s\n", i, ipi_funcs[i]);
+			printk(KERN_INFO "apic_ipi:	options=[%d] %s\n", i, ipi_funcs[i]);
 		}
 
 		return -1;

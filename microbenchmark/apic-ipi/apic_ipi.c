@@ -69,7 +69,7 @@ static int apic_ipi_init(void)
 	char name[KSYM_NAME_LEN];
 	int i;
 
-	if (!options) {
+	if (!options || options >= MAXNUMA) {
 		printk(KERN_INFO "apic_ipi: you should run insmod apic_ipi.ko options=XX, bit flags:\n");
 		for (i = 0; i < sizeof(ipi_funcs) / sizeof(ipi_funcs[0]); i++) {
 			printk(KERN_INFO "apic_ipi:	bit[%d] %s\n", i, ipi_funcs[i]);
